@@ -1,7 +1,7 @@
 # scratch
 an open-source self-balancing robot built from scratch
 
-See it in action [here]!
+See it in action [here](https://youtu.be/LrDqXtu8--8)!
 
 ## Overview
 
@@ -671,3 +671,7 @@ This nasty issue occurs when the motor encoder on one of the wheels is not provi
 *The robot is balancing somewhat well, but one of the wheels is a little bit jerky; almost as if it is lagging behind the other wheel.*
 
 Switch off the robot and check that both wheels are tightened into the axle properly. If a wheel has become loose, it must be removed off and the axle must be tightened with a small hex key.
+
+## Acknowledgments
+
+Thanks to Profs. Nathan Lindquist and Adam Johnson at Bethel University for their mentorship and guidance throughout this project.
