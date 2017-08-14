@@ -3,11 +3,11 @@ an open-source self-balancing robot built from scratch
 
 see it in action [here]!
 
-**I. ****Overview**
+****Overview***
 
-*scratch* is a self-balancing mobile robotics platform. The robot essentially balances itself on two wheels using IMU sensors and a feedback loop with its motors. It drives using commands dictated from the user via a Sony DualShock 3 gamepad controller. Its balancing functions are primarily handled by an Arduino Mega microcontroller, and its higher-level driving instructions and operations are handled by an on-board Raspberry Pi communicating with the Arduino. The goal of the project is to implement hierarchical control structure in a highly effective way and explore the development of reflex arcs and behaviors in a partially autonomous mobile robotics system.
+*scratch* is a self-balancing mobile robotics platform. The robot balances itself on two wheels using IMU sensors and a feedback loop with its motors. It drives using commands dictated from the user via a Sony DualShock 3 gamepad controller. Its balancing functions are handled by an Arduino Mega microcontroller, and its higher-level driving instructions and operations are handled by an on-board Raspberry Pi communicating with the Arduino. The goal of the project is to implement hierarchical control structure and explore the development of complex behavior in a partially autonomous mobile robotics system.
 
-**II. Parts list**
+***Parts list***
 
 **Frame/Chassis**
 
