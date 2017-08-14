@@ -1,7 +1,7 @@
 # scratch
 an open-source self-balancing robot built from scratch
 
-see it in action [here]!
+See it in action [here]!
 
 ## Overview
 
@@ -11,91 +11,91 @@ see it in action [here]!
 
 ### Frame/Chassis
 
-*M3 frame bolt *(numerous)*
+* M3 frame bolt *(numerous)*
 
-*M3 nut *(numerous)*
+* M3 nut *(numerous)*
 
-*aluminum M3 L-bracket connector piece *(numerous)*
+* aluminum M3 L-bracket connector piece *(numerous)*
 
-*aluminum M3 45-degree connector piece *(numerous)*
+* aluminum M3 45-degree connector piece *(numerous)*
 
-*aluminum M3 right angle connector piece *(numerous)*
+* aluminum M3 right angle connector piece *(numerous)*
 
-*4.0 cm aluminum frame piece *(x4)*
+* 4.0 cm aluminum frame piece *(x4)*
 
-*6.0 cm aluminum frame piece *(x5)*
+* 6.0 cm aluminum frame piece *(x5)*
 
-*10.0 cm aluminum frame piece *(x4)*
+* 10.0 cm aluminum frame piece *(x4)*
 
-*15.0 cm aluminum frame piece *(x6)*
+* 15.0 cm aluminum frame piece *(x6)*
 
-*20.0 cm aluminum frame piece *(x2)*
+* 20.0 cm aluminum frame piece *(x2)*
 
-*[Actobotics 1.50" aluminum channel](https://www.sparkfun.com/products/12383)
+* [Actobotics 1.50" aluminum channel](https://www.sparkfun.com/products/12383)
 
 	-fits perfectly around Turnigy lipo battery to hold it in using friction
 
-*bottom chassis plate (with mounting holes for motors)
+* bottom chassis plate (with mounting holes for motors)
 
-*neck chassis plate (with mounting holes for servo motor neck)
+* neck chassis plate (with mounting holes for servo motor neck)
 
-*3M double-sided foam adhesive tape
+* 3M double-sided foam adhesive tape
 
-*foam padding
+* foam padding
 
-*toggling power switch for Arduino power supply
+* toggling power switch for Arduino power supply
 
-*mounting board for Raspberry Pi (Sketchup files included)
+* mounting board for Raspberry Pi (Sketchup files included)
 
-*mounting board for Arduino
+* mounting board for Arduino
 
-*mounting board for power regulator
+* mounting board for power regulator
 
-*4-40 standoff bolt (plastic) *(numerous)*
+* 4-40 standoff bolt (plastic) *(numerous)*
 
-*4-40 nut (plastic) *(numerous)*
+* 4-40 nut (plastic) *(numerous)*
 
-*4-40 washer (plastic) *(numerous)*
+* 4-40 washer (plastic) *(numerous)*
 
 ### Power supply
 
-*[Turnigy 2200 mAh 3s 20C lithium-polymer battery pack](http://www.google.com/url?q=http%3A%2F%2Fwww.amazon.com%2FTurnigy-2200mAh-20C-Lipo-Pack%2Fdp%2FB0072AEY5I%2Fref%3Dsr_1_1%3Fie%3DUTF8%26qid%3D1439567180%26sr%3D8-1%26keywords%3Dturnigy%2B2200%2Bmah%2Blipo&sa=D&sntz=1&usg=AFQjCNF5dib2UrzGPrWb_GFaAW4P7uDTdw)
+* [Turnigy 2200 mAh 3s 20C lithium-polymer battery pack](http://www.google.com/url?q=http%3A%2F%2Fwww.amazon.com%2FTurnigy-2200mAh-20C-Lipo-Pack%2Fdp%2FB0072AEY5I%2Fref%3Dsr_1_1%3Fie%3DUTF8%26qid%3D1439567180%26sr%3D8-1%26keywords%3Dturnigy%2B2200%2Bmah%2Blipo&sa=D&sntz=1&usg=AFQjCNF5dib2UrzGPrWb_GFaAW4P7uDTdw)
 
 	-power supply for Arduino, its peripherals, DC motors and all lower-level sensors
 
-*[AmazonBasics 5600 mAh portable power bank](http://www.amazon.com/AmazonBasics-Portable-Power-Micro-Cable/dp/B00LRK8HJ8)
+* [AmazonBasics 5600 mAh portable power bank](http://www.amazon.com/AmazonBasics-Portable-Power-Micro-Cable/dp/B00LRK8HJ8)
 
 	-power supply for Raspberry Pi and its peripherals
 
-*[HobbyKing lipoly low voltage alarm](http://www.hobbyking.com/hobbyking/store/__18987__On_Board_Lipoly_Low_Voltage_Alarm_2s_4s_.html)
+* [HobbyKing lipoly low voltage alarm](http://www.hobbyking.com/hobbyking/store/__18987__On_Board_Lipoly_Low_Voltage_Alarm_2s_4s_.html)
 
 	-connected to lipo battery, alerts user when battery reaches low voltages
 
-*[Polulu step-down voltage regulator D15V70F5S3](https://www.pololu.com/product/2111)
+* [Polulu step-down voltage regulator D15V70F5S3](https://www.pololu.com/product/2111)
 
 	-takes 11.1V from lipo battery and drops it to 5V to power Arduino and its sensors
 
 ### Arduino
 
-*Arduino Mega 2560
+* Arduino Mega 2560
 
 	-the central microprocessing unit of the balancing sensors and control structure
 
-*[Sparkfun MegaShield kit](https://www.sparkfun.com/products/9346)
+* [Sparkfun MegaShield kit](https://www.sparkfun.com/products/9346)
 
 	-prototyping shield for Arduino Mega
 
-*[Sparkfun 3.3-5V bi-direction logic level converter](https://www.sparkfun.com/products/12009)
+* [Sparkfun 3.3-5V bi-direction logic level converter](https://www.sparkfun.com/products/12009)
 
 	-for interfacing Arduino serial communication (operating at 5V) with Raspberry Pi GPIO serial communication (operating at 3.3V)
 
-*[Mini modular breadboard](https://www.sparkfun.com/products/12043) *(x2)*
+* [Mini modular breadboard](https://www.sparkfun.com/products/12043) *(x2)*
 
 	-adhesively attached to MegaShield for prototyping on the Mega
 
 ### DC motor control
 
-*[Polulu dual MC33926 motor drive shield for Arduino](https://www.pololu.com/product/2503)
+* [Polulu dual MC33926 motor drive shield for Arduino](https://www.pololu.com/product/2503)
 
 	-contains H-bridge circuitry to operate the DC motors to provide balancing functions
 
@@ -103,31 +103,31 @@ see it in action [here]!
 
 	-no heatsink needed
 
-*Brushed DC motor with optical encoder *(x2)*
+* Brushed DC motor with optical encoder *(x2)*
 
-*[BaneBots 4 7/8 robot wheel](http://banebots.com/pc/WHB-WS-498/T80P-494BO-U3) *(x2)*
+* [BaneBots 4 7/8 robot wheel](http://banebots.com/pc/WHB-WS-498/T80P-494BO-U3) *(x2)*
 
 ### Sensors
 
-*[Sparkfun 9DOF LSM9DS0 IMU breakout](https://www.sparkfun.com/products/12636)
+* [Sparkfun 9DOF LSM9DS0 IMU breakout](https://www.sparkfun.com/products/12636)
 
 	-combined accelerometer/gyroscope/magnetometer sensor used for calculating an estimated angle of the robot, configured to communicate with Arduino via I2C protocol
 
 	-*important:* operates at 3.3V
 
-*[Sparkfun 3.3-5V bi-direction logic level converter](https://www.sparkfun.com/products/12009)
+* [Sparkfun 3.3-5V bi-direction logic level converter](https://www.sparkfun.com/products/12009)
 
 	-for interfacing Arduino I2C (operating at 5V) with LSM9DS0 I2C (operating at 3.3V)
 
-*[Sharp GP2Y0A41SK0F short range infrared proximity sensor](https://www.sparkfun.com/products/12728) *(x4)*
+* [Sharp GP2Y0A41SK0F short range infrared proximity sensor](https://www.sparkfun.com/products/12728) *(x4)*
 
 	-two placed on front of robot facing forwards, two placed on back of robot facing backwards
 
 	-used to help robot detect objects in autonomous exploration mode
 
-*[Infrared sensor jumper wire](https://www.sparkfun.com/products/8733) *(x4)*
+* [Infrared sensor jumper wire](https://www.sparkfun.com/products/8733) *(x4)*
 
-*[Mini modular breadboard](https://www.sparkfun.com/products/12043) *(x2)*
+* [Mini modular breadboard](https://www.sparkfun.com/products/12043) *(x2)*
 
 	-prototyping space where IMU sensor and its level shifter are wired
 
@@ -135,33 +135,33 @@ see it in action [here]!
 
 ### Servo motor control
 
-*[Renbotics ServoShield V2.0](http://www.seeedstudio.com/depot/Renbotics-ServoShield-V20-p-1299.html)
+* [Renbotics ServoShield V2.0](http://www.seeedstudio.com/depot/Renbotics-ServoShield-V20-p-1299.html)
 
 	-configured to communicate with Arduino via I2C in order to control up to 16 servos
 
 	-*important:* the printed labels on the hardware channels 1-16 actually correspond to software channels 0-15; this discrepancy is handled in the Arduino program
 
-*Servo motor *(x2)*
+* Servo motor *(x2)*
 
 	-these servos provide 2 degrees of freedom for the neck: tilting forwards to backwards, and swiveling left to right
 
-*Servo neck mounting pieces
+* Servo neck mounting pieces
 
 ### Raspberry Pi
 
-*[Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
+* [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
 
 	-the central high-level control unit taking wireless commands from controller via Bluetooth, and communicating them to Arduino via serial on GPIO pins
 
-*[SanDisk Ultra 16GB microSDHC Class 10 memory card](http://www.bestbuy.com/site/sandisk-ultra-16gb-microsdhc-class-10-memory-card-black/4120107.p?id=1218457270079)
+* [SanDisk Ultra 16GB microSDHC Class 10 memory card](http://www.bestbuy.com/site/sandisk-ultra-16gb-microsdhc-class-10-memory-card-black/4120107.p?id=1218457270079)
 
 	-memory card housing filesystem for Raspberry Pi
 
-*[Bluetoth 4.0 USB module](https://www.adafruit.com/products/1327)
+* [Bluetoth 4.0 USB module](https://www.adafruit.com/products/1327)
 
 	-provides Bluetooth capabilities for wireless communication with Sony DualShock 3 gamepad controller
 
-*[Miniature WiFi (802.11b/g/n) module](https://www.adafruit.com/products/814)
+* [Miniature WiFi (802.11b/g/n) module](https://www.adafruit.com/products/814)
 
 	-provides WiFi capabilities to Raspberry Pi
 
@@ -171,7 +171,7 @@ see it in action [here]!
 
 	-these features offer fantastically flexible operation of the Raspberry Pi; it can be controlled headlessly and wirelessly in the robot without the need to physically plug in a keyboard, mouse and monitor every time the user must execute a command, launch a script, properly shut down, etc.
 
-*[Sony DualShock3 wireless gamepad controller](http://www.amazon.com/PlayStation-Dualshock-Wireless-Controller-Black-3/dp/B0015AARJI)
+* [Sony DualShock3 wireless gamepad controller](http://www.amazon.com/PlayStation-Dualshock-Wireless-Controller-Black-3/dp/B0015AARJI)
 
 	-operated by user to drive the robot
 
@@ -179,35 +179,35 @@ see it in action [here]!
 
 ### Essential development tools and peripheral devices
 
-*[IMAX B6 Lipro digital balance charger](http://www.amazon.com/Original-Lipro-Digital-Balance-Charger/dp/B006TT49O4)
+* [IMAX B6 Lipro digital balance charger](http://www.amazon.com/Original-Lipro-Digital-Balance-Charger/dp/B006TT49O4)
 
 	-used to charge/balance/store/discharge lithium-polymer batteries
 
-*operating system running Arduino IDE environment
+* operating system running Arduino IDE environment
 
 	-for developing and uploading Arduino source code to robot (written in Arduino C/C++)
 
-*USB 2.0 A-male to B-male cable
+* USB 2.0 A-male to B-male cable
 
 	-for connecting Arduino to computer for uploading source code and serial monitoring
 
-*HDMI-capable external monitor
+* HDMI-capable external monitor
 
 	-for graphic display of Raspberry Pi during development
 
-*USB keyboard
+* USB keyboard
 
 	-for keyboard control of Raspberry Pi during development
 
-*USB mouse
+* USB mouse
 
 	-for mouse control of Raspberry Pi during development
 
-*USB 2.0 A-male to mini-B cable
+* USB 2.0 A-male to mini-B cable
 
 	-for connecting Sony DualShock 3 gamepad controller to Raspberry Pi for charging and initial pairing process
 
-*USB hub
+* USB hub
 
 	-allows several USB peripherals to connect to Raspberry Pi over one USB port
 
@@ -215,7 +215,7 @@ see it in action [here]!
 
 ### Wiring diagram
 
-*(See appendix 3.1).*
+*(See appendix 3.1.)*
 
 ### Pinout list
 
@@ -339,7 +339,7 @@ see it in action [here]!
 
 ### Device connection diagram
 
-*(See appendix 3.2).*
+*(See appendix 3.2.)*
 
 ## How it works
 
@@ -376,7 +376,7 @@ The robot is outfitted with a number of proximity sensors which could be used in
 ### Serial communication
 The Arduino and Raspberry PI communicate asynochronously over serial. The Arduino control loop operates on a much faster timestep than the Raspberry Pi, so the Arduino receives a driving command every few loops. The Raspberry Pi waits, every loop, to hear back from the Arduino.
 
-###Raspberry Pi connecting to controller using sixad and pairing with sixpair
+### Raspberry Pi connecting to controller using sixad and pairing with sixpair
 The Raspberry Pi must be paired with the Playstation controller using sixad and pairing with sixpair. See [this blog](http://booting-rpi.blogspot.com/2012/08/dualshock-3-and-raspberry-pi.html) for a walkthrough.
 
 ## Instructions
@@ -462,27 +462,27 @@ Now that the robot is up and running, it can be operated by the user with the So
 
 The controls marked with the *(!)* sign are advanced controls. These should be operated with discretion, by the experienced user:
 
-*It is recommended that maximum drive smoothing is used all the time, for the most stable and safe driving.
+* It is recommended that maximum drive smoothing is used all the time, for the most stable and safe driving.
 
-*Autonomous mode is highly experimental and subject to potentially destructive failures. It is worth mentioning that any movement of the joysticks at all during autonomous mode will manually override, terminating autonomous mode and giving control back to the user instantly.
+* Autonomous mode is highly experimental and subject to potentially destructive failures. It is worth mentioning that any movement of the joysticks at all during autonomous mode will manually override, terminating autonomous mode and giving control back to the user instantly.
 
-*Terminating the script will require regaining access to the Raspberry Pi if the user wishes to relaunch the program.
+* Terminating the script will require regaining access to the Raspberry Pi if the user wishes to relaunch the program.
 
 Finally, pressing down all four buttons (triangle, circle, cross, and square) at the same time momentarily will reboot the Raspberry Pi (note that this does not relaunch the script). Holding these down for 3 seconds will cause the Raspberry Pi to shut down and remain powered off.
 
 #### Driving tips
 
-*When in doubt, go slow. There is generally more stability at slower speeds, and less stability at high speeds.
+* When in doubt, go slow. There is generally more stability at slower speeds, and less stability at high speeds.
 
-*Be very cautious when negotiating rough or uneven terrain. This is especially true where there are small gaps or elevated lips on the floor changing from one type of surface to another. If negotiated improperly, these can easily cause the robot to tip over violently. It is best to attempt to drive over these slowly and evenly. It is essential to cross at a 45 degree angle rather than head on so that the obstacle is handled one wheel at a time.
+* Be very cautious when negotiating rough or uneven terrain. This is especially true where there are small gaps or elevated lips on the floor changing from one type of surface to another. If negotiated improperly, these can easily cause the robot to tip over violently. It is best to attempt to drive over these slowly and evenly. It is essential to cross at a 45 degree angle rather than head on so that the obstacle is handled one wheel at a time.
 
-*The robot should be able to handle disturbances such as pushes or kicks to the top fairly well, but there is a limit. Pushing the robot’s wheels or holding them in place will likely cause it to fall over. The mobility of the wheels is the only mechanism by which it is able to balance itself.
+* The robot should be able to handle disturbances such as pushes or kicks to the top fairly well, but there is a limit. Pushing the robot’s wheels or holding them in place will likely cause it to fall over. The mobility of the wheels is the only mechanism by which it is able to balance itself.
 
-*Do not pick up the robot while it is balancing. This disrupts the feedback loop in the robot’s control structure.
+* Do not pick up the robot while it is balancing. This disrupts the feedback loop in the robot’s control structure.
 
-*Do not drive the robot into walls, or obstacles that will not allow its wheels to rotate.
+* Do not drive the robot into walls, or obstacles that will not allow its wheels to rotate.
 
-*Do not operate on wet, slippery, sandy, or fiery surfaces.
+* Do not operate on wet, slippery, sandy, or fiery surfaces.
 
 ### Powering down
 
@@ -494,7 +494,7 @@ When the user wishes to completely shut down the system, the following steps sho
 
 2. Shut down the Raspberry Pi. This can be done by holding down all four buttons on the controller (triangle, circle, cross, and square) at the same time for three seconds. Otherwise, (such as if the controller has become disconnected, or the program was terminated), it can be done by plugging in a keyboard (or accessing via a remote shell server client) and issuing the shell command `sudo shutdown -h now`. This tells the Raspberry Pi to shut down immediately, and stay powered down (this is called a system halt). The yellow LED activity light on the Raspberry Pi will blink 10 times when it has fully shut down.
 
-**Important note:** It is absolutely imperative that the Raspberry Pi is properly shut down before its power supply is removed! Improper shutdown or simply switching off its power supply/pulling the plug can corrupt its filesystem, with the possibility of irreparably damaging the SD card and losing everything.
+* *Important note:** It is absolutely imperative that the Raspberry Pi is properly shut down before its power supply is removed! Improper shutdown or simply switching off its power supply/pulling the plug can corrupt its filesystem, with the possibility of irreparably damaging the SD card and losing everything.
 
 3. It is now safe to switch off the Raspberry Pi’s power bank. Hold the power button on the left outward-facing side of the robot for approximately one second until the power bank’s blue LED bars stop glowing.
 
