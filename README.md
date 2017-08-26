@@ -7,340 +7,6 @@ See it in action [here](https://youtu.be/LrDqXtu8--8)!
 
 *scratch* is a self-balancing mobile robotics platform. The robot balances itself on two wheels using IMU sensors and a feedback loop with its motors. It drives using commands dictated from the user via a Sony DualShock 3 gamepad controller. Its balancing functions are handled by an Arduino Mega microcontroller, and its higher-level driving instructions and operations are handled by an on-board Raspberry Pi communicating with the Arduino. The goal of the project is to implement hierarchical control structure and explore the development of complex behavior in a partially autonomous mobile robotics system.
 
-## Parts list
-
-### Frame/Chassis
-
-* M3 frame bolt *(numerous)*
-
-* M3 nut *(numerous)*
-
-* aluminum M3 L-bracket connector piece *(numerous)*
-
-* aluminum M3 45-degree connector piece *(numerous)*
-
-* aluminum M3 right angle connector piece *(numerous)*
-
-* 4.0 cm aluminum frame piece *(x4)*
-
-* 6.0 cm aluminum frame piece *(x5)*
-
-* 10.0 cm aluminum frame piece *(x4)*
-
-* 15.0 cm aluminum frame piece *(x6)*
-
-* 20.0 cm aluminum frame piece *(x2)*
-
-* [Actobotics 1.50" aluminum channel](https://www.sparkfun.com/products/12383)
-
-	-fits perfectly around Turnigy lipo battery to hold it in using friction
-
-* bottom chassis plate (with mounting holes for motors)
-
-* neck chassis plate (with mounting holes for servo motor neck)
-
-* 3M double-sided foam adhesive tape
-
-* foam padding
-
-* toggling power switch for Arduino power supply
-
-* mounting board for Raspberry Pi (Sketchup files included)
-
-* mounting board for Arduino
-
-* mounting board for power regulator
-
-* 4-40 standoff bolt (plastic) *(numerous)*
-
-* 4-40 nut (plastic) *(numerous)*
-
-* 4-40 washer (plastic) *(numerous)*
-
-### Power supply
-
-* [Turnigy 2200 mAh 3s 20C lithium-polymer battery pack](http://www.google.com/url?q=http%3A%2F%2Fwww.amazon.com%2FTurnigy-2200mAh-20C-Lipo-Pack%2Fdp%2FB0072AEY5I%2Fref%3Dsr_1_1%3Fie%3DUTF8%26qid%3D1439567180%26sr%3D8-1%26keywords%3Dturnigy%2B2200%2Bmah%2Blipo&sa=D&sntz=1&usg=AFQjCNF5dib2UrzGPrWb_GFaAW4P7uDTdw)
-
-	-power supply for Arduino, its peripherals, DC motors and all lower-level sensors
-
-* [AmazonBasics 5600 mAh portable power bank](http://www.amazon.com/AmazonBasics-Portable-Power-Micro-Cable/dp/B00LRK8HJ8)
-
-	-power supply for Raspberry Pi and its peripherals
-
-* [HobbyKing lipoly low voltage alarm](http://www.hobbyking.com/hobbyking/store/__18987__On_Board_Lipoly_Low_Voltage_Alarm_2s_4s_.html)
-
-	-connected to lipo battery, alerts user when battery reaches low voltages
-
-* [Polulu step-down voltage regulator D15V70F5S3](https://www.pololu.com/product/2111)
-
-	-takes 11.1V from lipo battery and drops it to 5V to power Arduino and its sensors
-
-### Arduino
-
-* Arduino Mega 2560
-
-	-the central microprocessing unit of the balancing sensors and control structure
-
-* [Sparkfun MegaShield kit](https://www.sparkfun.com/products/9346)
-
-	-prototyping shield for Arduino Mega
-
-* [Sparkfun 3.3-5V bi-direction logic level converter](https://www.sparkfun.com/products/12009)
-
-	-for interfacing Arduino serial communication (operating at 5V) with Raspberry Pi GPIO serial communication (operating at 3.3V)
-
-* [Mini modular breadboard](https://www.sparkfun.com/products/12043) *(x2)*
-
-	-adhesively attached to MegaShield for prototyping on the Mega
-
-### DC motor control
-
-* [Polulu dual MC33926 motor drive shield for Arduino](https://www.pololu.com/product/2503)
-
-	-contains H-bridge circuitry to operate the DC motors to provide balancing functions
-
-	-capable of operating at relatively high currents without heating up significantly
-
-	-no heatsink needed
-
-* Brushed DC motor with optical encoder *(x2)*
-
-* [BaneBots 4 7/8 robot wheel](http://banebots.com/pc/WHB-WS-498/T80P-494BO-U3) *(x2)*
-
-### Sensors
-
-* [Sparkfun 9DOF LSM9DS0 IMU breakout](https://www.sparkfun.com/products/12636)
-
-	-combined accelerometer/gyroscope/magnetometer sensor used for calculating an estimated angle of the robot, configured to communicate with Arduino via I2C protocol
-
-	-*important:* operates at 3.3V
-
-* [Sparkfun 3.3-5V bi-direction logic level converter](https://www.sparkfun.com/products/12009)
-
-	-for interfacing Arduino I2C (operating at 5V) with LSM9DS0 I2C (operating at 3.3V)
-
-* [Sharp GP2Y0A41SK0F short range infrared proximity sensor](https://www.sparkfun.com/products/12728) *(x4)*
-
-	-two placed on front of robot facing forwards, two placed on back of robot facing backwards
-
-	-used to help robot detect objects in autonomous exploration mode
-
-* [Infrared sensor jumper wire](https://www.sparkfun.com/products/8733) *(x4)*
-
-* [Mini modular breadboard](https://www.sparkfun.com/products/12043) *(x2)*
-
-	-prototyping space where IMU sensor and its level shifter are wired
-
-	-adhesively attached to back of battery mount, centered directly on axis with the wheelbase between DC motors
-
-### Servo motor control
-
-* [Renbotics ServoShield V2.0](http://www.seeedstudio.com/depot/Renbotics-ServoShield-V20-p-1299.html)
-
-	-configured to communicate with Arduino via I2C in order to control up to 16 servos
-
-	-*important:* the printed labels on the hardware channels 1-16 actually correspond to software channels 0-15; this discrepancy is handled in the Arduino program
-
-* Servo motor *(x2)*
-
-	-these servos provide 2 degrees of freedom for the neck: tilting forwards to backwards, and swiveling left to right
-
-* Servo neck mounting pieces
-
-### Raspberry Pi
-
-* [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
-
-	-the central high-level control unit taking wireless commands from controller via Bluetooth, and communicating them to Arduino via serial on GPIO pins
-
-* [SanDisk Ultra 16GB microSDHC Class 10 memory card](http://www.bestbuy.com/site/sandisk-ultra-16gb-microsdhc-class-10-memory-card-black/4120107.p?id=1218457270079)
-
-	-memory card housing filesystem for Raspberry Pi
-
-* [Bluetoth 4.0 USB module](https://www.adafruit.com/products/1327)
-
-	-provides Bluetooth capabilities for wireless communication with Sony DualShock 3 gamepad controller
-
-* [Miniature WiFi (802.11b/g/n) module](https://www.adafruit.com/products/814)
-
-	-provides WiFi capabilities to Raspberry Pi
-
-	-especially useful for setting up remote SSH server (this [mosh mobile shell client](https://mosh.mit.edu/) is highly recommended) in order to remotely access Raspberry Pi command shell
-
-	-also useful for setting up a remote VNC server (this [RealVNC remote VNC viewer](https://www.realvnc.com/) is highly recommended) in order to remotely access Raspberry Pi X-server desktop (the graphic user interface launched via "startx" command)
-
-	-these features offer fantastically flexible operation of the Raspberry Pi; it can be controlled headlessly and wirelessly in the robot without the need to physically plug in a keyboard, mouse and monitor every time the user must execute a command, launch a script, properly shut down, etc.
-
-* [Sony DualShock3 wireless gamepad controller](http://www.amazon.com/PlayStation-Dualshock-Wireless-Controller-Black-3/dp/B0015AARJI)
-
-	-operated by user to drive the robot
-
-	-communicates wirelessly with Raspberry Pi via Bluetooth
-
-### Essential development tools and peripheral devices
-
-* [IMAX B6 Lipro digital balance charger](http://www.amazon.com/Original-Lipro-Digital-Balance-Charger/dp/B006TT49O4)
-
-	-used to charge/balance/store/discharge lithium-polymer batteries
-
-* operating system running Arduino IDE environment
-
-	-for developing and uploading Arduino source code to robot (written in Arduino C/C++)
-
-* USB 2.0 A-male to B-male cable
-
-	-for connecting Arduino to computer for uploading source code and serial monitoring
-
-* HDMI-capable external monitor
-
-	-for graphic display of Raspberry Pi during development
-
-* USB keyboard
-
-	-for keyboard control of Raspberry Pi during development
-
-* USB mouse
-
-	-for mouse control of Raspberry Pi during development
-
-* USB 2.0 A-male to mini-B cable
-
-	-for connecting Sony DualShock 3 gamepad controller to Raspberry Pi for charging and initial pairing process
-
-* USB hub
-
-	-allows several USB peripherals to connect to Raspberry Pi over one USB port
-
-## Wiring connections and pinout
-
-### Wiring diagram
-
-*(See appendix 3.1.)*
-
-### Pinout list
-
-#### Arduino pinout
-
-<table>
-  <tr>
-    <td>Analog input 0</td>
-    <td>Motor L current sensing</td>
-  </tr>
-  <tr>
-    <td>Analog input 1</td>
-    <td>Motor R current sensing</td>
-  </tr>
-  <tr>
-    <td>Analog input 4</td>
-    <td>Front-left proximity sensor reading</td>
-  </tr>
-  <tr>
-    <td>Analog input 5</td>
-    <td>Front-right proximity sensor reading</td>
-  </tr>
-  <tr>
-    <td>Analog input 6</td>
-    <td>Back-left proximity sensor reading</td>
-  </tr>
-  <tr>
-    <td>Analog input 7</td>
-    <td>Back-right proximity sensor reading</td>
-  </tr>
-  <tr>
-    <td>Digital 4</td>
-    <td>Motor shield enable pin</td>
-  </tr>
-  <tr>
-    <td>Digital 7</td>
-    <td>Motor L direction pin</td>
-  </tr>
-  <tr>
-    <td>Digital 8</td>
-    <td>Motor R direction pin</td>
-  </tr>
-  <tr>
-    <td>Digital 9</td>
-    <td>Motor L pulse width modulation pin</td>
-  </tr>
-  <tr>
-    <td>Digital 10</td>
-    <td>Motor R pulse width modulation pin</td>
-  </tr>
-  <tr>
-    <td>Digital 12</td>
-    <td>Motor fault flag pin</td>
-  </tr>
-  <tr>
-    <td>Digital 14 (Tx3)</td>
-    <td>Serial communication with Raspberry Pi (Tx)</td>
-  </tr>
-  <tr>
-    <td>Digital 15 (Rx3)</td>
-    <td>Serial communication with Raspberry Pi (Rx)</td>
-  </tr>
-  <tr>
-    <td>Digital 16</td>
-    <td>Encoder L direction reading</td>
-  </tr>
-  <tr>
-    <td>Digital 17</td>
-    <td>Encoder R direction reading</td>
-  </tr>
-  <tr>
-    <td>Digital 18 (interrupt 5)</td>
-    <td>Encoder L interrupt pin</td>
-  </tr>
-  <tr>
-    <td>Digital 19 (interrupt 4)</td>
-    <td>Encoder R interrupt pin</td>
-  </tr>
-  <tr>
-    <td>Digital 20 (SDA)</td>
-    <td>Data signal for I2C communication</td>
-  </tr>
-  <tr>
-    <td>Digital 21 (SCL)</td>
-    <td>Clock signal for I2C communication</td>
-  </tr>
-</table>
-
-
-#### ServoShield pinout
-
-<table>
-  <tr>
-    <td>Hardware pin 15/Software pin 14</td>
-    <td>Neck tilting servo motor</td>
-  </tr>
-  <tr>
-    <td>Hardware pin 16/Software pin 15</td>
-    <td>Neck swiveling servo motor</td>
-  </tr>
-</table>
-
-
-#### Raspberry Pi pinout
-
-<table>
-  <tr>
-    <td>Pin #6/GND</td>
-    <td>Serial communication with Arduino (ground)</td>
-  </tr>
-  <tr>
-    <td>Pin #8/GPIO14 (TxD0)</td>
-    <td>Serial communication with Arduino (Tx)</td>
-  </tr>
-  <tr>
-    <td>Pin #10/GPIO15 (RxD0)</td>
-    <td>Serial communication with Arduino (Rx)</td>
-  </tr>
-</table>
-
-
-### Device connection diagram
-
-*(See appendix 3.2.)*
-
 ## How it works
 
 ### Goal of the self-balancing robot
@@ -391,11 +57,11 @@ The Raspberry Pi must be paired with the Playstation controller using sixad and 
 
 2. Switch on the Raspberry Pi power bank. This can be done by pressing the power button found on the left, outer-facing side of the robot.
 
-3. Gain access to the Raspberry Pi. The Raspberry Pi is running headlessly (which means it is not connected to any monitor, keyboard, mouse, etc.), so it must be controlled somehow. This can be done by hooking up an HDMI monitor and USB keyboard/mouse, or by accessing its command line through a remote secure shell server (enter `ssh pi@192.168.194.240` (or the Pi’s IP address) or `mosh pi@192.168.194.240` (if using the mosh client) into a terminal session connected over the same network, and enter the password, raspberry, when prompted, to connect). *(See appendix 5.1 for list of useful Linux shell commands).*
+3. Gain access to the Raspberry Pi. The Raspberry Pi is running headlessly (which means it is not connected to any monitor, keyboard, mouse, etc.), so it must be controlled somehow. This can be done by hooking up an HDMI monitor and USB keyboard/mouse, or by accessing its command line through a remote secure shell server (enter `ssh pi@192.168.194.240` (or the Pi’s IP address) or `mosh pi@192.168.194.240` (if using the mosh client) into a terminal session connected over the same network, and enter the password, raspberry, when prompted, to connect). *(See appendix 3 for list of useful Linux shell commands).*
 
 4. Launch the script. From the Raspberry Pi shell, enter the command `sudo python3 Programming/Python/Programs/flexibot.py` to launch the program which connects to the Sony DualShock 3 gamepad controller and operates the balancing robot.
 
-5. The program will go through its initialization process. Follow the printed prompts to connect to the controller via Bluetooth. It may take several tries to get the Raspberry Pi to recognize the controller. *If this step is repeatedly unsuccessful, see appendix 5.2 for troubleshooting).*
+5. The program will go through its initialization process. Follow the printed prompts to connect to the controller via Bluetooth. It may take several tries to get the Raspberry Pi to recognize the controller. *If this step is repeatedly unsuccessful, see appendix 4 for troubleshooting).*
 
 6. Once the controller is connected, the Raspberry Pi will open its serial port and begin its communications with the Arduino.
 
@@ -407,7 +73,7 @@ The Raspberry Pi must be paired with the Playstation controller using sixad and 
 
 9. Throw the metal toggle switch on the front of the robot from `OFF` to `ON`.
 
-10. The robot will calibrate and initialize itself, which should only take a second or so. The robot will then begin to balance on its own. *(If it does not spring into action at this point, see appendix 5.2 for troubleshooting).*
+10. The robot will calibrate and initialize itself, which should only take a second or so. The robot will then begin to balance on its own. *(If it does not spring into action at this point, see appendix 4 for troubleshooting).*
 
 11. The system is now entirely operational.
 
@@ -552,33 +218,367 @@ A small LCD touch screen will be mounted to the servo neck of the robot, as well
 
 Now that a solid hardware robotics platform has been developed for the most part, the main future developments will be on the software side. The goal is to pursue deeper levels of autonomy in the form of hierarchical control structure, developing more advanced behaviors and combinations of reflex arcs. Measures may be taken to model functions of the human central nervous system in developing an efficient and effective control structure. Hopefully this system can be used as a platform to study real-world implementations of reinforcement learning, statistical learning, pattern recognition, localization and mapping, and other types of machine learning and artificial intelligence.
 
+## Parts list
+
+### Frame/Chassis
+
+* M3 frame bolt *(numerous)*
+
+* M3 nut *(numerous)*
+
+* aluminum M3 L-bracket connector piece *(numerous)*
+
+* aluminum M3 45-degree connector piece *(numerous)*
+
+* aluminum M3 right angle connector piece *(numerous)*
+
+* 4.0 cm aluminum frame piece *(x4)*
+
+* 6.0 cm aluminum frame piece *(x5)*
+
+* 10.0 cm aluminum frame piece *(x4)*
+
+* 15.0 cm aluminum frame piece *(x6)*
+
+* 20.0 cm aluminum frame piece *(x2)*
+
+* [Actobotics 1.50" aluminum channel](https://www.sparkfun.com/products/12383)
+
+  -fits perfectly around Turnigy lipo battery to hold it in using friction
+
+* bottom chassis plate (with mounting holes for motors)
+
+* neck chassis plate (with mounting holes for servo motor neck)
+
+* 3M double-sided foam adhesive tape
+
+* foam padding
+
+* toggling power switch for Arduino power supply
+
+* mounting board for Raspberry Pi (Sketchup files included)
+
+* mounting board for Arduino
+
+* mounting board for power regulator
+
+* 4-40 standoff bolt (plastic) *(numerous)*
+
+* 4-40 nut (plastic) *(numerous)*
+
+* 4-40 washer (plastic) *(numerous)*
+
+### Power supply
+
+* [Turnigy 2200 mAh 3s 20C lithium-polymer battery pack](http://www.google.com/url?q=http%3A%2F%2Fwww.amazon.com%2FTurnigy-2200mAh-20C-Lipo-Pack%2Fdp%2FB0072AEY5I%2Fref%3Dsr_1_1%3Fie%3DUTF8%26qid%3D1439567180%26sr%3D8-1%26keywords%3Dturnigy%2B2200%2Bmah%2Blipo&sa=D&sntz=1&usg=AFQjCNF5dib2UrzGPrWb_GFaAW4P7uDTdw)
+
+  -power supply for Arduino, its peripherals, DC motors and all lower-level sensors
+
+* [AmazonBasics 5600 mAh portable power bank](http://www.amazon.com/AmazonBasics-Portable-Power-Micro-Cable/dp/B00LRK8HJ8)
+
+  -power supply for Raspberry Pi and its peripherals
+
+* [HobbyKing lipoly low voltage alarm](http://www.hobbyking.com/hobbyking/store/__18987__On_Board_Lipoly_Low_Voltage_Alarm_2s_4s_.html)
+
+  -connected to lipo battery, alerts user when battery reaches low voltages
+
+* [Polulu step-down voltage regulator D15V70F5S3](https://www.pololu.com/product/2111)
+
+  -takes 11.1V from lipo battery and drops it to 5V to power Arduino and its sensors
+
+### Arduino
+
+* Arduino Mega 2560
+
+  -the central microprocessing unit of the balancing sensors and control structure
+
+* [Sparkfun MegaShield kit](https://www.sparkfun.com/products/9346)
+
+  -prototyping shield for Arduino Mega
+
+* [Sparkfun 3.3-5V bi-direction logic level converter](https://www.sparkfun.com/products/12009)
+
+  -for interfacing Arduino serial communication (operating at 5V) with Raspberry Pi GPIO serial communication (operating at 3.3V)
+
+* [Mini modular breadboard](https://www.sparkfun.com/products/12043) *(x2)*
+
+  -adhesively attached to MegaShield for prototyping on the Mega
+
+### DC motor control
+
+* [Polulu dual MC33926 motor drive shield for Arduino](https://www.pololu.com/product/2503)
+
+  -contains H-bridge circuitry to operate the DC motors to provide balancing functions
+
+  -capable of operating at relatively high currents without heating up significantly
+
+  -no heatsink needed
+
+* Brushed DC motor with optical encoder *(x2)*
+
+* [BaneBots 4 7/8 robot wheel](http://banebots.com/pc/WHB-WS-498/T80P-494BO-U3) *(x2)*
+
+### Sensors
+
+* [Sparkfun 9DOF LSM9DS0 IMU breakout](https://www.sparkfun.com/products/12636)
+
+  -combined accelerometer/gyroscope/magnetometer sensor used for calculating an estimated angle of the robot, configured to communicate with Arduino via I2C protocol
+
+  -*important:* operates at 3.3V
+
+* [Sparkfun 3.3-5V bi-direction logic level converter](https://www.sparkfun.com/products/12009)
+
+  -for interfacing Arduino I2C (operating at 5V) with LSM9DS0 I2C (operating at 3.3V)
+
+* [Sharp GP2Y0A41SK0F short range infrared proximity sensor](https://www.sparkfun.com/products/12728) *(x4)*
+
+  -two placed on front of robot facing forwards, two placed on back of robot facing backwards
+
+  -used to help robot detect objects in autonomous exploration mode
+
+* [Infrared sensor jumper wire](https://www.sparkfun.com/products/8733) *(x4)*
+
+* [Mini modular breadboard](https://www.sparkfun.com/products/12043) *(x2)*
+
+  -prototyping space where IMU sensor and its level shifter are wired
+
+  -adhesively attached to back of battery mount, centered directly on axis with the wheelbase between DC motors
+
+### Servo motor control
+
+* [Renbotics ServoShield V2.0](http://www.seeedstudio.com/depot/Renbotics-ServoShield-V20-p-1299.html)
+
+  -configured to communicate with Arduino via I2C in order to control up to 16 servos
+
+  -*important:* the printed labels on the hardware channels 1-16 actually correspond to software channels 0-15; this discrepancy is handled in the Arduino program
+
+* Servo motor *(x2)*
+
+  -these servos provide 2 degrees of freedom for the neck: tilting forwards to backwards, and swiveling left to right
+
+* Servo neck mounting pieces
+
+### Raspberry Pi
+
+* [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
+
+  -the central high-level control unit taking wireless commands from controller via Bluetooth, and communicating them to Arduino via serial on GPIO pins
+
+* [SanDisk Ultra 16GB microSDHC Class 10 memory card](http://www.bestbuy.com/site/sandisk-ultra-16gb-microsdhc-class-10-memory-card-black/4120107.p?id=1218457270079)
+
+  -memory card housing filesystem for Raspberry Pi
+
+* [Bluetoth 4.0 USB module](https://www.adafruit.com/products/1327)
+
+  -provides Bluetooth capabilities for wireless communication with Sony DualShock 3 gamepad controller
+
+* [Miniature WiFi (802.11b/g/n) module](https://www.adafruit.com/products/814)
+
+  -provides WiFi capabilities to Raspberry Pi
+
+  -especially useful for setting up remote SSH server (this [mosh mobile shell client](https://mosh.mit.edu/) is highly recommended) in order to remotely access Raspberry Pi command shell
+
+  -also useful for setting up a remote VNC server (this [RealVNC remote VNC viewer](https://www.realvnc.com/) is highly recommended) in order to remotely access Raspberry Pi X-server desktop (the graphic user interface launched via "startx" command)
+
+  -these features offer fantastically flexible operation of the Raspberry Pi; it can be controlled headlessly and wirelessly in the robot without the need to physically plug in a keyboard, mouse and monitor every time the user must execute a command, launch a script, properly shut down, etc.
+
+* [Sony DualShock3 wireless gamepad controller](http://www.amazon.com/PlayStation-Dualshock-Wireless-Controller-Black-3/dp/B0015AARJI)
+
+  -operated by user to drive the robot
+
+  -communicates wirelessly with Raspberry Pi via Bluetooth
+
+### Essential development tools and peripheral devices
+
+* [IMAX B6 Lipro digital balance charger](http://www.amazon.com/Original-Lipro-Digital-Balance-Charger/dp/B006TT49O4)
+
+  -used to charge/balance/store/discharge lithium-polymer batteries
+
+* operating system running Arduino IDE environment
+
+  -for developing and uploading Arduino source code to robot (written in Arduino C/C++)
+
+* USB 2.0 A-male to B-male cable
+
+  -for connecting Arduino to computer for uploading source code and serial monitoring
+
+* HDMI-capable external monitor
+
+  -for graphic display of Raspberry Pi during development
+
+* USB keyboard
+
+  -for keyboard control of Raspberry Pi during development
+
+* USB mouse
+
+  -for mouse control of Raspberry Pi during development
+
+* USB 2.0 A-male to mini-B cable
+
+  -for connecting Sony DualShock 3 gamepad controller to Raspberry Pi for charging and initial pairing process
+
+* USB hub
+
+  -allows several USB peripherals to connect to Raspberry Pi over one USB port
+
+## Wiring connections and pinout
+
+### Wiring diagram
+
+*(See appendix 1.1.)*
+
+### Pinout list
+
+#### Arduino pinout
+
+<table>
+  <tr>
+    <td>Analog input 0</td>
+    <td>Motor L current sensing</td>
+  </tr>
+  <tr>
+    <td>Analog input 1</td>
+    <td>Motor R current sensing</td>
+  </tr>
+  <tr>
+    <td>Analog input 4</td>
+    <td>Front-left proximity sensor reading</td>
+  </tr>
+  <tr>
+    <td>Analog input 5</td>
+    <td>Front-right proximity sensor reading</td>
+  </tr>
+  <tr>
+    <td>Analog input 6</td>
+    <td>Back-left proximity sensor reading</td>
+  </tr>
+  <tr>
+    <td>Analog input 7</td>
+    <td>Back-right proximity sensor reading</td>
+  </tr>
+  <tr>
+    <td>Digital 4</td>
+    <td>Motor shield enable pin</td>
+  </tr>
+  <tr>
+    <td>Digital 7</td>
+    <td>Motor L direction pin</td>
+  </tr>
+  <tr>
+    <td>Digital 8</td>
+    <td>Motor R direction pin</td>
+  </tr>
+  <tr>
+    <td>Digital 9</td>
+    <td>Motor L pulse width modulation pin</td>
+  </tr>
+  <tr>
+    <td>Digital 10</td>
+    <td>Motor R pulse width modulation pin</td>
+  </tr>
+  <tr>
+    <td>Digital 12</td>
+    <td>Motor fault flag pin</td>
+  </tr>
+  <tr>
+    <td>Digital 14 (Tx3)</td>
+    <td>Serial communication with Raspberry Pi (Tx)</td>
+  </tr>
+  <tr>
+    <td>Digital 15 (Rx3)</td>
+    <td>Serial communication with Raspberry Pi (Rx)</td>
+  </tr>
+  <tr>
+    <td>Digital 16</td>
+    <td>Encoder L direction reading</td>
+  </tr>
+  <tr>
+    <td>Digital 17</td>
+    <td>Encoder R direction reading</td>
+  </tr>
+  <tr>
+    <td>Digital 18 (interrupt 5)</td>
+    <td>Encoder L interrupt pin</td>
+  </tr>
+  <tr>
+    <td>Digital 19 (interrupt 4)</td>
+    <td>Encoder R interrupt pin</td>
+  </tr>
+  <tr>
+    <td>Digital 20 (SDA)</td>
+    <td>Data signal for I2C communication</td>
+  </tr>
+  <tr>
+    <td>Digital 21 (SCL)</td>
+    <td>Clock signal for I2C communication</td>
+  </tr>
+</table>
+
+
+#### ServoShield pinout
+
+<table>
+  <tr>
+    <td>Hardware pin 15/Software pin 14</td>
+    <td>Neck tilting servo motor</td>
+  </tr>
+  <tr>
+    <td>Hardware pin 16/Software pin 15</td>
+    <td>Neck swiveling servo motor</td>
+  </tr>
+</table>
+
+
+#### Raspberry Pi pinout
+
+<table>
+  <tr>
+    <td>Pin #6/GND</td>
+    <td>Serial communication with Arduino (ground)</td>
+  </tr>
+  <tr>
+    <td>Pin #8/GPIO14 (TxD0)</td>
+    <td>Serial communication with Arduino (Tx)</td>
+  </tr>
+  <tr>
+    <td>Pin #10/GPIO15 (RxD0)</td>
+    <td>Serial communication with Arduino (Rx)</td>
+  </tr>
+</table>
+
+
+### Device connection diagram
+
+*(See appendix 1.2.)*
+
 ## Appendices
 
-### 3.1 Wiring diagram
+### 1.1 Wiring diagram
 
 This diagram shows the electrical circuit connections of the entire system.
 
 ![wiring diagram](schematics/wiring_diagram.jpg)
 
-### 3.2 Device connection diagram
+### 1.2 Device connection diagram
 
 This diagram shows the overall connections between the various devices in the system. The hope is to give a general overview of which components are connected to each other, and how they are working together.
 
 ![device connections](schematics/device_connections.jpg)
 
-### 4.1 Hierarchical PID structure
+### 2.1 Hierarchical PID structure
 
 This diagram shows the hierarchical nature of the primary PID controllers used in the system--a technique known as cascading PID control. The design of this system is modeled after the human central nervous system, where the brain influences the activity of the spinal cord to command voluntary movements. This is done through a hierarchy of control levels: *strategy* (represented by the association areas of neocortex and basal ganglia of the forebrain), *tactics* (represented by the motor cortex and cerebellum), and *execution* (represented by the brain stem and spinal cord).
 
 ![PID hierarchy](schematics/pid_hierarchy.jpg)
 
-### 4.2 Control process block diagram
+### 2.2 Control process block diagram
 
 This diagram shows the flow of all control process occurring simultaneously in the robot.
 
 ![control processes](schematics/control_processes.jpg)
 
-### 5.1 Useful Linux shell commands
+### 3. Useful Linux shell commands
 
 `startx`: used to launch the graphic user interface (starts the X server which is the desktop)
 
@@ -608,7 +608,7 @@ This diagram shows the flow of all control process occurring simultaneously in t
 
 `sudo shutdown -h now`: immediately shuts down the Raspberry Pi and enters system halt mode where the filesystem is unmounted and the Raspberry Pi will stay powered down; it is then safe to unplug power supply
 
-### Troubleshooting
+### 4. Troubleshooting
 
 #### Raspberry Pi issues
 
