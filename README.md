@@ -1,5 +1,5 @@
 # scratch
-An open-source, autonomously-balancing mobile robot built from scratch.
+_an open-source, autonomously-balancing mobile robot built from scratch_
 
 See it in action [here](https://youtu.be/LrDqXtu8--8)!
 
