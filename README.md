@@ -23,7 +23,7 @@ It is essential that the agent has an awareness of its own position. In the case
 
 To this end, two sensors are applied - the accelerometer and the gyroscope. The accelerometer measures the component of acceleration being experienced along any of the three axes at any given time. When the accelerometer is in a steady state, the primary acceleration experienced is that due to gravity. This essentially allows the accelerometer to tell which way is "down." In our case, the x and z components of the accelerometer are given to be in the plane of the robot as it tips forward and backwards. Thus, given both of these sensor readings, we can use inverse tangent trigonometry to calculate an angle estimate of the body from the accelerometer.
 
-The accelerometer gives relatively low-noise readings, but accumulates bias over time; the gyroscope is very noisy but unbiased. The two sensors are integrated via a Kalman filter to provide a state estimate.
+The gyroscope gives relatively low-noise readings, but accumulates bias over time; the accelerometer is very noisy but unbiased. The two sensors are integrated via a Kalman filter to provide a state estimate.
 
 ### Lowest level PID loop for motors
 A very low-level short-time scale PID controller for each wheel adjusts the raw voltage supplied to the motor in order to achieve a target wheel speed.
